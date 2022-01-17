@@ -1,0 +1,4 @@
+2022-01-15 14:29:28,409 - root - WARNING - New Channel in detection
+2022-01-15 14:29:32,810 - root - WARNING - Speed of channel 1.0
+2022-01-15 14:29:32,810 - root - WARNING - Source Playing http://setp-eu-glb-mslv4.akamaized.net/hls/live/2010558/21popullore/main.m3u8?hdnts=exp=1642290840~acl=/hls/live/2010558/21popullore/*~hmac=dc6cafb7ffa30b796f88ade19a34e9f2fb674e135a8743582d924f85368c5b62
+2022-01-15 14:29:32,810 - root - WARNING - SourceAudio is 1 Frames playing 45578669Muted 0
