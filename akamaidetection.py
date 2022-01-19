@@ -49,17 +49,17 @@ def detection(source):
 		fps = video.get(cv2.CAP_PROP_FPS)
 		if fps < 24:
 			logging.error("Channel Error")
-			if source in cv2Detection:
+			if main in cv2Detection:
 				pass
 				video.release()
 			else:
-				post_message_to_slack(main + "\n" + "OpenCV Detection lowen than 24 fps")
-				cv2Detection.append(source)
+				post_message_to_slack(main + "\n" + "Source issue")
+				cv2Detection.append(main)
 				video.release()
 		else:
-			if source in cv2Detection:
-				cv2Detection.remove(source)
-				post_message_to_slack(main + "\n" + "OpenCV Detection FPS Fixed")
+			if main in cv2Detection:
+				cv2Detection.remove(main)
+				post_message_to_slack(main + "\n" + "Source back to normal")
 			logging.warning("Channel Passed OPENCV DETECTION")
 			video.release()
 			media_player = vlc.MediaPlayer()
@@ -78,62 +78,57 @@ def detection(source):
 				logging.warning("SourceAudio is: " + str(audio) + " " + "FramesPlaying " + str(timevideo) + " Muted " + str(mediaMuted))
 				if timevideo < 5000:
 					logging.error("Repeated Scene")
-					if source in downList:
+					if main in downList:
 						pass
 					else:
-						post_message_to_slack(main + " Source Repeating same scene")
-						downList.append(source)
+						post_message_to_slack(main + " Source issue")
+						downList.append(main)
 				else:
-					if source in downList:
-						downList.remove(source)
+					if main in downList:
+						downList.remove(main)
 						logging.warning("Repeated Scene Fixed")
-						post_message_to_slack(main + " Source Repeating same scene is back to normal")
+						post_message_to_slack(main + " Source back to normal")
 					if audio == 0:
 						logging.error("No Audio")
-						if source in downAudio:
+						if main in downAudio:
 							pass
 						else:
 							post_message_to_slack(main + " Source has no audio")
-							downAudio.append(source)
+							downAudio.append(main)
 					else:
-						if source in downAudio:
-							downAudio.remove(source)
+						if main in downAudio:
+							downAudio.remove(main)
 							logging.warning("Audio Fixed")
 							post_message_to_slack(main + " Audio of source has been fixed")
 					if audio == 0:
 						logging.error("No Audio")
-						if source in downAudio:
+						if main in downAudio:
 							pass
 						else:
 							post_message_to_slack(main + " Source has no audio")
-							downAudio.append(source)
+							downAudio.append(main)
 					else:
-						if source in downAudio:
-							downAudio.remove(source)
+						if main in downAudio:
+							downAudio.remove(main)
 							logging.warning("Audio Fixed")
 							post_message_to_slack(main + " Audio of source has been fixed")
 					media_player.stop()
 	except cv2.error as e:
 		post_message_to_slack("Source Error " + main)
-		cv2Detection.append(source)
+		cv2Detection.append(main)
 		logging.error("Error OPENCV " + main)
+
 
 
 def mainChannels():
 	for i in range(5):
-		detection("")
-
-
+		detection("http://setp-eu-glb-mslv4.akamaized.net/hls/live/2010312/tringshqip/main.m3u8?hdnts=exp=1642969692~acl=/*~hmac=27ab505a20a6c862fbe334460bbf4c347e49e369e44b044511d5f940e5d428da")
 def tringChannels():
 	for i in range(3):	
-		detection("")
-
-
+		detection("http://setp-eu-glb-mslv4.akamaized.net/hls/live/2008362/tringtring/main.m3u8?hdnts=exp=1642969697~acl=/*~hmac=c5bd2ef9c0215cf21273aa1c494fee054fbe1b09da0b6d5e314a67f0f8ba5767")
 def digitalbChannels():
 	for i in range(2):
-		detection("")
-
-
+		detection("http://setp-eu-glb-mslv4.akamaized.net/hls/live/2008362/tringkids/main.m3u8?hdnts=exp=1642969703~acl=/*~hmac=24805a9b4a44e97864471fdd4c2129ccff30d83336859292cdefd8cd0d89a098")
 
 
 threading.Thread(target=mainChannels).start()
