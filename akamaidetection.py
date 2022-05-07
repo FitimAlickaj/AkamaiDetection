@@ -17,9 +17,9 @@ scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/au
          "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 client = gspread.authorize(creds)
-akamai = client.open("Tier1 Bot Data").worksheet("API-CHANNEL-LIST")
+akamai = client.open("SheetName").worksheet("Your file name")
 #Slack Config
-slack_token = 'xoxb-302006564691-1725170443333-g2jjIG1VvlPrUYrX2EG4dT80'
+slack_token = 'xoxb'
 slack_channel = '#system-monitoring'
 slack_icon_emoji = ':eyes:'
 slack_user_name = 'SUPPORT' # name of app in slack
@@ -38,12 +38,7 @@ downAudio = []
 cv2Detection = []
 
 logging.basicConfig(filename='akamai.log', filemode='a+', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
 def detection(source):
-	firstFilter = source[:source.find('.m3u8')].strip()
-	main = firstFilter[:firstFilter.find('main')].strip()
-	main = main.replace('http://setp-eu-glb-mslv4.akamaized.net/hls/live/','')
-	logging.warning("Channel in Detection: " + main)
 	try:
 		video = cv2.VideoCapture(str(source))
 		fps = video.get(cv2.CAP_PROP_FPS)
