@@ -119,21 +119,3 @@ def detection(source):
 		logging.error("Error OPENCV " + main)
 
 
-
-def mainChannels():
-	for i in range(5):
-		detection("http://setp-eu-glb-mslv4.akamaized.net/hls/live/2010312/tringshqip/main.m3u8?hdnts=exp=1642969692~acl=/*~hmac=27ab505a20a6c862fbe334460bbf4c347e49e369e44b044511d5f940e5d428da")
-def tringChannels():
-	for i in range(3):	
-		detection("http://setp-eu-glb-mslv4.akamaized.net/hls/live/2008362/tringtring/main.m3u8?hdnts=exp=1642969697~acl=/*~hmac=c5bd2ef9c0215cf21273aa1c494fee054fbe1b09da0b6d5e314a67f0f8ba5767")
-def digitalbChannels():
-	for i in range(2):
-		detection("http://setp-eu-glb-mslv4.akamaized.net/hls/live/2008362/tringkids/main.m3u8?hdnts=exp=1642969703~acl=/*~hmac=24805a9b4a44e97864471fdd4c2129ccff30d83336859292cdefd8cd0d89a098")
-
-
-threading.Thread(target=mainChannels).start()
-threading.Thread(target=tringChannels).start()
-threading.Thread(target=digitalbChannels).start()
-
-
-
